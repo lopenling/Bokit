@@ -11,4 +11,4 @@ from bokit.commands.CreateFlashcards import CreateFlashcards
 import bokit.utils as utils
 import bokit.workflows as workflows
 
-del commands    
+del commands
