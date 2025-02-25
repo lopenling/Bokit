@@ -99,6 +99,7 @@ def transifex_to_docs(org,
         string = strings_json['data'][i]['attributes']['key']
         string = string.replace('་␣', '')
         string = string.replace(' ', '')
+        string = string.replace('␣', '')
         translation = translation_json['data'][i]['attributes']['strings']['other']
         style = strings_json['data'][i]['attributes']['instructions']
 
@@ -256,6 +257,7 @@ def transifex_to_docs(org,
         next_style = (
             combined[i + 1][3] if i + 1 < len(combined) else None
         )  # Get the next block's style if available
+        '''
         if next_style == "Normal":
             requests.append({
                 "insertText": {
@@ -264,7 +266,7 @@ def transifex_to_docs(org,
                 }
             })
             current_index += 1
-
+        '''
     # Execute the batch update to add content with appropriate styles
     docs_service.documents().batchUpdate(
         documentId=new_doc_id,

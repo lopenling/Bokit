@@ -1,6 +1,7 @@
 def translate_with_claude(api_key: str,
                           system: str,
                           messages: list,
+                          model: str,
                           chunk_size: int = 10) -> list:
     
     '''
@@ -10,6 +11,7 @@ def translate_with_claude(api_key: str,
         api_key (str): The API key for the Anthropic API.
         system (str): The system in which the messages appear.
         messages (list): The messages to translate.
+        model (str): The model to use for translation.
         chunk_size (int): The number of messages to translate in each chunk.
     
     Returns:
@@ -24,7 +26,7 @@ def translate_with_claude(api_key: str,
 
     for i in range(0, len(messages), chunk_size):
         chunk = messages[i:i + chunk_size]
-        message = client.messages.create(model="claude-3-opus-20240229",
+        message = client.messages.create(model=model,
                                          max_tokens=4096,
                                          temperature=0,
                                          system=system,
