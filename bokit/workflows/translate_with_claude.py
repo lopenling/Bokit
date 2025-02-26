@@ -2,6 +2,7 @@ def translate_with_claude(api_key: str,
                           system: str,
                           messages: list,
                           model: str,
+                          max_tokens: int = 4096,
                           chunk_size: int = 10) -> list:
     
     '''
@@ -12,6 +13,7 @@ def translate_with_claude(api_key: str,
         system (str): The system in which the messages appear.
         messages (list): The messages to translate.
         model (str): The model to use for translation.
+        max_tokens (int): The maximum number of tokens to generate.
         chunk_size (int): The number of messages to translate in each chunk.
     
     Returns:
@@ -27,7 +29,7 @@ def translate_with_claude(api_key: str,
     for i in range(0, len(messages), chunk_size):
         chunk = messages[i:i + chunk_size]
         message = client.messages.create(model=model,
-                                         max_tokens=4096,
+                                         max_tokens=max_tokens,
                                          temperature=0,
                                          system=system,
                                          messages=chunk)
